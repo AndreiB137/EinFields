@@ -3,7 +3,7 @@
 [![JAX](https://img.shields.io/badge/JAX-latest-orange.svg)](https://github.com/google/jax)
 [![Diffrax](https://img.shields.io/badge/Diffrax-latest-green.svg)](https://github.com/patrick-kidger/diffrax)
 [![Orbax](https://img.shields.io/badge/Orbax-latest-purple.svg)](https://github.com/google/orbax)
-[![Flax](https://img.shields.io/badge/Orbax-latest-red.svg)](https://github.com/google/flax)
+[![Flax](https://img.shields.io/badge/Flax-latest-red.svg)](https://github.com/google/flax)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 <div align="center">
