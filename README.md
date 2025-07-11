@@ -1,7 +1,9 @@
 # EinFields
 
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![JAX](https://img.shields.io/badge/JAX-latest-orange.svg)](https://github.com/google/jax)
+[![Diffrax](https://img.shields.io/badge/Diffrax-latest-green.svg)](https://github.com/patrick-kidger/diffrax)
+[![Orbax](https://img.shields.io/badge/Orbax-latest-purple.svg)](https://github.com/google/orbax)
+[![Flax](https://img.shields.io/badge/Orbax-latest-red.svg)](https://github.com/google/flax)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 <div align="center">
@@ -32,8 +34,8 @@ This approach exploits a fundamental property of gravity: every geometric object
 ## Get Started
 
 ```bash
-   git clone https://github.com/your-username/EinFields.git
-   cd /your_path/EinFields
+git clone https://github.com/your-username/EinFields.git
+cd /your_path/EinFields
 ```
 
 Install the dependencies (ideally in a fresh environment), e.g. 
