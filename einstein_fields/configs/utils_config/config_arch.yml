@@ -1,0 +1,24 @@
+SIREN:
+  omega_0: 3.
+WIRE:
+  first_omega_0: 4.
+  hidden_omega_0: 4.
+  scale: 5.
+PirateNet:
+  nonlinearity: 0.0
+  pi_init: null
+  reparam:
+    type: weight_fact
+    mean: 1.0
+    stddev: 0.1
+  fourier_emb:
+    embed_scale: 2.
+    embed_dim: 256
+MLP_PINN:
+  reparam:
+    type: weight_fact
+    mean: 1.0
+    stddev: 0.1
+  fourier_emb:
+    embed_scale: 2.
+    embed_dim: 256

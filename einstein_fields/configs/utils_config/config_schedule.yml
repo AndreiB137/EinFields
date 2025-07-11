@@ -1,0 +1,21 @@
+constant: {}
+cosine_decay:
+  decay_steps: 100
+  alpha: 0.001
+  exponent: 1.0
+exponential_decay:
+  transition_steps: 100
+  decay_steps: 300
+  decay_rate: 0.96
+warmup_cosine_decay:
+  peak_value: 0.01
+  warmup_steps: 100
+  decay_steps: 100
+  end_value: 0.0
+  exponent: 1.0
+warmup_exponential_decay:
+  peak_value: 0.01
+  warmup_steps: 100
+  transition_steps: 100
+  decay_rate: 0.96
+  transition_begin: 100

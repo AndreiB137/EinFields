@@ -1,0 +1,37 @@
+wandb:
+  project: ''
+  name: ''
+  group: ''
+  validate_every_n_epochs: 10
+  validation_num_batches: 10
+log_dir: ''
+run_dir: ''
+checkpoint:
+  load_dir: ''
+  reset_optimizer: false
+data:
+  data_dir: ''
+  losses:
+    jacobian: false
+    hessian: false
+architecture:
+  model_name: MLP
+  hidden_dim: 16
+  output_dim: 10
+  num_layers: 4
+  activation: silu
+  extra_model_args: {}
+optimizer:
+  name: adam
+  extra_optimizer_args: {}
+  learning_rate: 0.001
+  lr_scheduler: cosine_decay
+  extra_scheduler_args: {}
+training:
+  epochs: 100
+  num_batches: 80
+  gradient_conflict: null
+  rng_seed: 0
+  norm: ''
+  integration: false
+  metric_type: ''

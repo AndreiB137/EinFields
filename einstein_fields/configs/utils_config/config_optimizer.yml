@@ -1,0 +1,34 @@
+adam:
+  b1: 0.9
+  b2: 0.999
+  eps: 1.0e-08
+adamw:
+  b1: 0.9
+  b2: 0.999
+  eps: 1.0e-08
+  weight_decay: 0.001
+soap:
+  b1: 0.95
+  b2: 0.95
+  eps: 1.0e-08
+  precondition_frequency: 1
+  weight_decay: 0.0
+lars:
+  momentum: 0.9
+  eps: 0.
+  weight_decay: 0.001
+  trust_coefficient: 0.001
+  nesterov: false
+lamb:
+  b1: 0.9
+  b2: 0.999
+  eps: 1.0e-06
+  eps_root: 0.
+  weight_decay: 0.001
+kfac:
+  l2_reg: 0.0
+  initial_damping: 1.0
+  multi_device: false
+  num_burnin_steps: 0
+lbfgs:
+  memory_size: 10
