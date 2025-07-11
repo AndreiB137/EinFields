@@ -34,7 +34,7 @@ This approach exploits a fundamental property of gravity: every geometric object
 ## Get Started
 
 ```bash
-git clone https://github.com/your-username/EinFields.git
+git clone https://github.com/AndreiB137/EinFields.git
 cd /your_path/EinFields
 ```
 
