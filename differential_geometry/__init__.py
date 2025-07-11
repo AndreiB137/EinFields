@@ -1,0 +1,2 @@
+from .tensor_calculus import DifferentialGeometry as diffgeo
+from .vectorized_tensor_calculus import VectorizedDifferentialGeometry as vdiffgeo
