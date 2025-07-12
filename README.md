@@ -152,6 +152,25 @@ EinFields/
   </details>
 </div>
 
+### Gravitational waves
+
+#### Plus and cross polarizations
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="misc/geodesic_gifs/plus_polarization.gif" alt="Plus polarization" width="350">
+        <br>Plus polarization
+      </td>
+      <td align="center">
+        <img src="misc/geodesic_gifs/cross_polarization.gif" alt="Cross polarization" width="350">
+        <br>Cross polarization
+      </td>
+    </tr>
+  </table>
+</div>
+
 
 ## Documentation
 
