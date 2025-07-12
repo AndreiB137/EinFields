@@ -45,27 +45,33 @@ pip install -r requirements.txt
 
 For the imports to work, you need to add this directory (adjust accordingly) to your PYTHONPATH. There are several options:
 
+On macOS/Linux
 ```
-# On macOS/Linux
 For run: PYTHONPATH=/your_path/EinFields python ...
 
 For session: export PYTHONPATH=/your_path/EinFields in terminal
 
 Permanently: export PYTHONPATH=/your_path/EinFields add to ~/.bashrc or ~/.bashrc or ~./zshrc etc.
+```
 
-# VSCode
+VSCode
+
+```
 Put PYTHONPATH=/your_path/EinFields in .../EinFields/.env;
 
 Put "python.envFile": "${workspaceFolder}/.env" in settings.json;
 
 Put "envFile": "${workspaceFolder}/.env" in launch.json if debugging is not working with the above.
+```
 
-# On Windows
+On Windows
+
+```
 set PYTHONPATH=/your_path/EinFields
 ```
 
 
-The only major requirements is `jax`. For CUDA support install with `pip install -U "jax[cuda12]"` or consult the [guideline](https://jax.readthedocs.io/en/latest/installation.html) for your machine.
+The only major requirement is `jax`. For CUDA support install with `pip install -U "jax[cuda12]"` or consult the [guideline](https://jax.readthedocs.io/en/latest/installation.html) for your machine.
 
 `pip` seems to work much better than `conda` since many packages are not supported properly on conda.
 
@@ -96,7 +102,7 @@ EinFields/
 ## Documentation
 
 - **[Training Guide](How_to_train_EinFields.md)**: Comprehensive guide to training EinFields
-- **[Examples](differential_geometry/examples/)**: Jupyter notebooks demonstrating framework usage
+- **[Examples](differential_geometry/examples/)**: Jupyter notebooks demonstrating general relativity and differential geometry framework usage
 - **Configuration Templates**: Pre-configured YAML files in [`configs`](einstein_fields/configs/)
 
 ## Citation 
