@@ -107,89 +107,51 @@ EinFields/
 
 #### Kerr orbits
 
-<div class="kerr-orbits-container">
-  <div class="orbit-controls">
-    <ul class="orbit-list">
-      <li>
-        <details>
-        <summary class="orbit-item">a - 0.623 </summary>
-          <div align="center">
-            <img src="misc/geodesic_gifs/a_0.623_orbit_kerr.gif" alt="a=0.623 orbit" width="400">
-          </div>
-        </details>
-      </li>
-      <li>
-        <details>
-        <summary class="orbit-item"> a - 0.628  </summary>
-          <div align="center">
-            <img src="misc/geodesic_gifs/a_0.628_orbit_kerr.gif" alt="a=0.628 orbit" width="400">
-          </div>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary class="orbit-item">a - 0.646</summary>
-          <div align="center">
-            <img src="misc/geodesic_gifs/a_0.646_orbit_kerr.gif" alt="a=0.646 orbit" width="400">
-          </div>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary class="orbit-item">Prograde bound orbit </summary>
-          <div align="center">
-            <img src="misc/geodesic_gifs/prograde_bound_orbit_kerr.gif" alt="Prograde bound orbit" width="400">
-          </div>
-        </details>
-      </li>
-      <li>
-        <details>
-          <summary class="orbit-item">Zackiger orbit</summary>
-          <div align="center">
-            <img src="misc/geodesic_gifs/zackiger_orbit_kerr.gif" alt="Zackiger orbit" width="400">
-          </div>
-        </details>
-      </li>
-    </ul>
-  </div>
+<div>
+  <details>
+    <summary>a = 0.623</summary>
+    <div align="center">
+      <img src="misc/geodesic_gifs/a_0.623_orbit_kerr.gif" alt="a=0.623 orbit" width="400">
+    </div>
+  </details>
+</div>
+<br>
+<div>
+  <details>
+    <summary>a = 0.628</summary>
+    <div align="center">
+      <img src="misc/geodesic_gifs/a_0.628_orbit_kerr.gif" alt="a=0.628 orbit" width="400">
+    </div>
+  </details>
+</div>
+<br>
+<div>
+  <details>
+    <summary>a = 0.646 </summary>
+    <div align="center">
+      <img src="misc/geodesic_gifs/a_0.646_orbit_kerr.gif" alt="a=0.646 orbit" width="400">
+    </div>
+  </details>
+</div>
+<br>
+<div>
+  <details>
+    <summary> Prograde bound orbit </summary>
+    <div align="center">
+      <img src="misc/geodesic_gifs/prograde_bound_orbit_kerr.gif" alt="Prograde bound orbit" width="400">
+    </div>
+  </details>
+</div>
+<br>
+<div>
+  <details>
+    <summary> Zackiger orbit </summary>
+    <div align="center">
+      <img src="misc/geodesic_gifs/zackiger_orbit_kerr.gif" alt="Zackiger orbit" width="400">
+    </div>
+  </details>
 </div>
 
-<style>
-.kerr-orbits-container {
-  display: flex;
-  gap: 20px;
-  margin: 20px 0;
-}
-
-.orbit-controls {
-  flex: 1;
-}
-
-.orbit-list {
-  list-style: none;
-  padding: 0;
-}
-
-.orbit-item {
-  margin: 10px 0;
-  padding: 8px 12px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  user-select: none;
-}
-
-.orbit-item:hover {
-  background-color:rgb(255, 255, 255);
-  color:rgb(48, 14, 221);
-}
-
-.orbit-item.active {
-  background-color: #0366d6;
-  color: white;
-}
-
-</style>
 
 ## Documentation
 
