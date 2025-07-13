@@ -426,7 +426,8 @@ def store_full_distortion_in_file(
                                     coords_train, 
                                     coords_validation, 
                                     save_dir=sym_dist_dir,
-                                    store_GR_tensors=False
+                                    store_GR_tensors=False,
+                                    store_symmetric=True
             )
     
 
