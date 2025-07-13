@@ -1,0 +1,45 @@
+wandb:
+  group: Kerr_schild
+  name: Kerr_schild_SILU_190x5_jacobian_hessian
+  project: GRNeF_Brandstetter_lab
+  validate_every_n_epochs: 20
+  validation_num_batches: 200
+log_dir: /system/user/studentwork/bodnar/grnfs_fresh_logs
+run_dir: /system/user/studentwork/bodnar/grnfs_fresh_logs/n75p8pv8
+checkpoint:
+  load_dir: ''
+  reset_optimizer: true
+data:
+  data_dir: /system/user/studentwork/bodnar/project/GRNFs/neural_compression/data_train_andrei/Kerr/kerr_schild_cartesian/no_scale
+  losses:
+    hessian: true
+    jacobian: true
+architecture:
+  activation: silu
+  extra_model_args: {}
+  hidden_dim: 190
+  model_name: MLP
+  num_layers: 5
+  output_dim: 16
+optimizer:
+  extra_optimizer_args:
+    b1: 0.95
+    b2: 0.95
+    eps: 1.0e-08
+    precondition_frequency: 1
+    weight_decay: 0.0
+  extra_scheduler_args:
+    alpha: 1.0e-05
+    decay_steps: 64000
+    exponent: 1.0
+  learning_rate: 0.01
+  lr_scheduler: cosine_decay
+  name: soap
+training:
+  epochs: 200
+  gradient_conflict: grad_norm
+  integration: false
+  metric_type: full_flatten
+  norm: mse
+  num_batches: 320
+  rng_seed: 0
