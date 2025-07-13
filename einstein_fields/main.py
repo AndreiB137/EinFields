@@ -1,9 +1,33 @@
+""" MIT License
+# 
+# Copyright (c) 2025 Andrei Bodnar (Dept of Physics and Astronomy, University of Manchester,United Kingdom), Sandeep S. Cranganore (Ellis Unit, LIT AI Lab, JKU Linz, Austria) and Arturs Berzins (Ellis Unit, LIT AI Lab, JKU Linz, Austria)
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+"""
+
 import logging
-import os
+import os, sys
 os.environ['XLA_PYTHON_CLIENT_MEM_FRACTION'] = '.75'
 from ml_collections import ConfigDict, FrozenConfigDict
 import argparse
 import orbax.checkpoint as ocp
+sys.path.append(os.path.abspath(f"/system/user/crangano/EinFields/"))
 from einstein_fields.nn_models import list_activations, get_extra_model_cfg, model_key_dict
 from einstein_fields.utils import (
     get_optimizer_args,
@@ -54,7 +78,7 @@ def parse_args():
     # --- Configuration and checkpoint ---
 
     logg_check_group = parser.add_argument_group("Configuration, Logging, checkpoint")
-    logg_check_group.add_argument("--config_file", type=valid_file, default=None,
+    logg_check_group.add_argument("--config_file", type=valid_file, default="/system/user/crangano/EinFields/einstein_fields/configs/schwarzschild/config.yml",
                         help="Use a pre-defined yaml config file. If set, the training will start from this config file. Ensure the config has the same structure as the default config file.")
     logg_check_group.add_argument("--log_dir", type=valid_dir, default=None,
                         help="Path to the directory where the logs will be stored.")

@@ -1,38 +1,65 @@
-""
-import os
+""" MIT License
+# 
+# Copyright (c) 2025 Andrei Bodnar (Dept of Physics and Astronomy, University of Manchester,United Kingdom), Sandeep S. Cranganore (Ellis Unit, LIT AI Lab, JKU Linz, Austria) and Arturs Berzins (Ellis Unit, LIT AI Lab, JKU Linz, Austria)
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+"""
+
+import os, sys
 import jax
+import jax.numpy as jnp
 import shutil
 import logging
 import yaml
 jax.config.update('jax_enable_x64', True)
 jax.config.update("jax_default_matmul_precision", "highest")
 
-# os.environ["JAX_PLATFORMS"] = "gpu"
+os.environ["JAX_PLATFORMS"] = "gpu"
+sys.path.append(os.path.abspath(f"/system/user/crangano/EinFields/"))
 from data_generation.utils_generate_data import (validate_config, create_coords_and_vol_el, loop_over_tensor_storing, return_metric_fn, store_other_coord_systems_quantities)
 
 if __name__ == '__main__':
     M = 1.0
-    a = 0.7
+    a = 0.0
     other_coordinate_systems = [] # "kerr_schild"  #["cartesian", "eddington_finkelstein"] 
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% main data generation part starts here %%%%%%%%%%%%%%%%%%%%%%%%%%
     config = {
-        "metric": "Kerr",
+        "metric": "Schwarzschild",
         "metric_args" : {
             "M": M,
             "a": a,
-            "Q": 0.0,
+            "Q": 0.0,  
             "G": 1.0,
             "c": 1.0,
         },
-        "coordinate_system":"kerr_schild_cartesian",
+        # "metric_args" : {
+        #     "polarization_amplitudes": (1.e-6, 1.e-6), 
+        #     "omega": 2.0},
+        "coordinate_system":"spherical",
         "other_coordinate_systems": other_coordinate_systems, 
-        "grid_shape": [1, 10, 10, 10],
+        "grid_shape": [1,128,128,128],
         "grid_range": [
             [0.0, 0.0],
-            [-3., 3.],
-            [-3., 3.], # always choose (0, \pi) since, zenith angle is always chosen as this
-            [0.1, 3.]], # always choose [0, 2\pi) for azimuthal angle from now on, since the angles, modulo phase has been rectified
-        "endpoint": [True, True, True, True],
+            [5.0, 140.0],
+            [1.e-2, jnp.pi-1.e-2], # always choose (0, \pi) since, zenith angle is always chosen as this
+            [0.0, 2.0*jnp.pi]], # always choose [0, 2\pi) for azimuthal angle from now on, since the angles, modulo phase has been rectified
+        "endpoint": [True, True, True, False],
         "store_quantities" : {
             "store_symmetric": True,
             "store_distortion": True,
@@ -40,8 +67,8 @@ if __name__ == '__main__':
         },
         "compute_volume_element": True,
         "recompute_volume_elements": True, # Not implemented yet
-        "problem": "test_script0",
-        "data_dir": "/Users/andrei/Documents/dataa/EinFields/data"} 
+        "problem": "geodesic_perihilion",
+        "data_dir": "/system/user/publicwork/crangano/neurips_runs/neurips_data/EinFields"} 
     
     validate_config(config)
     logging.basicConfig(level=logging.INFO, encoding='utf-8', force=True)

@@ -1,37 +1,45 @@
 wandb:
-  project: ''
-  name: ''
-  group: ''
-  validate_every_n_epochs: 10
+  project: 'GRNeF_Brandstetter_lab'
+  name: 'Gravitational_waves_new_SILU_128x6_with_hessian_grad_norm'
+  group: 'Gravitational_waves'
+  validate_every_n_epochs: 20
   validation_num_batches: 10
-log_dir: ''
+log_dir: '/system/user/publicwork/crangano/neurips_runs/checkpoints/EinFields/gws'
 run_dir: ''
 checkpoint:
   load_dir: ''
   reset_optimizer: false
 data:
-  data_dir: ''
+  data_dir: '/system/user/publicwork/crangano/neurips_runs/neurips_data/schwarzschild/EinFields/linearized_gravity/cartesian/no_scale'
   losses:
-    jacobian: false
-    hessian: false
+    jacobian: true
+    hessian: true
 architecture:
   model_name: MLP
-  hidden_dim: 16
+  hidden_dim: 256
   output_dim: 10
-  num_layers: 4
+  num_layers: 6
   activation: silu
   extra_model_args: {}
 optimizer:
-  name: adam
-  extra_optimizer_args: {}
-  learning_rate: 0.001
+  name: soap
+  extra_optimizer_args:
+    b1: 0.95
+    b2: 0.95
+    eps: 1.0e-08
+    precondition_frequency: 1
+    weight_decay: 0.0
+  learning_rate: 0.01
   lr_scheduler: cosine_decay
-  extra_scheduler_args: {}
+  extra_scheduler_args: 
+   decay_steps: 40000
+    alpha: 1.e-7
+    exponent : 1.0
 training:
-  epochs: 100
-  num_batches: 80
+  epochs: 200
+  num_batches: 200
   gradient_conflict: null
   rng_seed: 0
-  norm: ''
+  norm: 'mse'
   integration: false
-  metric_type: ''
+  metric_type: 'distortion_sym'
