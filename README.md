@@ -202,7 +202,7 @@ EinFields/
 ## Documentation
 
 - **[Training Guide](How_to_train_EinFields.md)**: Comprehensive guide to training EinFields
-- **[Examples](differential_geometry/examples/)**: Jupyter notebooks demonstrating general relativity and differential geometry framework usage
+- **[Examples](example_notebooks)**: Jupyter notebooks demonstrating general relativity, differential geometry framework usage and basic trained EinFields usage.
 - **Configuration Templates**: Pre-configured YAML files in [`configs`](einstein_fields/configs/)
 
 ## Citation 
