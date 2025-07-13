@@ -133,7 +133,7 @@ def parse_args():
     training_group.add_argument("--gradient_conflict", type=str, default=None, choices=["grad_norm"],
                         help="Weighting scheme for training. If None, no weighting scheme is used.")
     training_group.add_argument("--norm", type=str, default="mse", choices=["mse", "minkowski", "papuc"],
-                        help="Choice of norm.")
+                        help="Choice of norm. Minkowski and Papuc are experimental, not recommended to use.")
     training_group.add_argument("--integration", type=bool, default=False, 
                         help="Use integration with invariant volume elements, namely dV * sqrt(g) for the loss function.")
     training_group.add_argument("--metric_type", type=str, default="full_flatten", choices=["distortion", "full_flatten", "distortion_sym", "full_flatten_sym"],

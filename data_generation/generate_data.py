@@ -30,7 +30,7 @@ import yaml
 jax.config.update('jax_enable_x64', True)
 jax.config.update("jax_default_matmul_precision", "highest")
 
-os.environ["JAX_PLATFORMS"] = "gpu"
+os.environ["JAX_PLATFORMS"] = "cpu"
 from data_generation.utils_generate_data import (validate_config, create_coords_and_vol_el, loop_over_tensor_storing, return_metric_fn, store_other_coord_systems_quantities)
 
 if __name__ == '__main__':
@@ -38,14 +38,11 @@ if __name__ == '__main__':
     a = 0.0
     other_coordinate_systems = [] # "kerr_schild"  #["cartesian", "eddington_finkelstein"] 
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% main data generation part starts here %%%%%%%%%%%%%%%%%%%%%%%%%%
+
     config = {
         "metric": "Schwarzschild",
         "metric_args" : {
             "M": M,
-            "a": a,
-            "Q": 0.0,  
-            "G": 1.0,
-            "c": 1.0,
         },
         # if "metric": "GW" comment the above metric_args and uncomment te below metric_args
         # "metric_args" : {
@@ -67,8 +64,8 @@ if __name__ == '__main__':
         },
         "compute_volume_element": True,
         "recompute_volume_elements": True, # Not implemented yet
-        "problem": "geodesic_perihilion",
-        "data_dir": ".."} 
+        "problem": "test_script1",
+        "data_dir": "/Users/andrei/Documents/dataa/EinFields/data"} 
     
     validate_config(config)
     logging.basicConfig(level=logging.INFO, encoding='utf-8', force=True)
