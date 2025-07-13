@@ -21,7 +21,7 @@
 # SOFTWARE.
 """
 
-import os, sys
+import os
 import jax
 import jax.numpy as jnp
 import shutil
@@ -31,7 +31,6 @@ jax.config.update('jax_enable_x64', True)
 jax.config.update("jax_default_matmul_precision", "highest")
 
 os.environ["JAX_PLATFORMS"] = "gpu"
-sys.path.append(os.path.abspath(f"/system/user/crangano/EinFields/"))
 from data_generation.utils_generate_data import (validate_config, create_coords_and_vol_el, loop_over_tensor_storing, return_metric_fn, store_other_coord_systems_quantities)
 
 if __name__ == '__main__':
@@ -48,6 +47,7 @@ if __name__ == '__main__':
             "G": 1.0,
             "c": 1.0,
         },
+        # if "metric": "GW" comment the above metric_args and uncomment te below metric_args
         # "metric_args" : {
         #     "polarization_amplitudes": (1.e-6, 1.e-6), 
         #     "omega": 2.0},
@@ -68,7 +68,7 @@ if __name__ == '__main__':
         "compute_volume_element": True,
         "recompute_volume_elements": True, # Not implemented yet
         "problem": "geodesic_perihilion",
-        "data_dir": "/system/user/publicwork/crangano/neurips_runs/neurips_data/EinFields"} 
+        "data_dir": ".."} 
     
     validate_config(config)
     logging.basicConfig(level=logging.INFO, encoding='utf-8', force=True)
