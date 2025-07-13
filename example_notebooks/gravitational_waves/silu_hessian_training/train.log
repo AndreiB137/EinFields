@@ -1,0 +1,107 @@
+2025-07-13 02:56:42,809 - INFO - Storing the config at /system/user/publicwork/crangano/neurips_runs/checkpoints/EinFields/gws/qpwh94ds.
+2025-07-13 02:56:42,818 - INFO - Config stored successfully.
+2025-07-13 02:56:42,818 - INFO - Final config:
+2025-07-13 02:56:42,818 - INFO - architecture:
+  activation: silu
+  extra_model_args: {}
+  hidden_dim: 128
+  model_name: MLP
+  num_layers: 6
+  output_dim: 16
+checkpoint:
+  load_dir: ''
+  reset_optimizer: false
+data:
+  data_dir: /system/user/publicwork/crangano/neurips_runs/neurips_data/EinFields/linearized_gravity/cartesian/no_scale
+  losses:
+    hessian: true
+    jacobian: true
+log_dir: /system/user/publicwork/crangano/neurips_runs/checkpoints/EinFields/gws
+optimizer:
+  extra_optimizer_args:
+    b1: 0.95
+    b2: 0.95
+    eps: 1.0e-08
+    precondition_frequency: 1
+    weight_decay: 0.0
+  extra_scheduler_args:
+    alpha: 1.0e-07
+    decay_steps: 40000
+    exponent: 1.0
+  learning_rate: 0.01
+  lr_scheduler: cosine_decay
+  name: soap
+run_dir: /system/user/publicwork/crangano/neurips_runs/checkpoints/EinFields/gws/qpwh94ds
+training:
+  epochs: 200
+  gradient_conflict: grad_norm
+  integration: false
+  metric_type: full_flatten
+  norm: mse
+  num_batches: 200
+  rng_seed: 0
+wandb:
+  group: Gravitational_waves
+  name: Gravitational_waves_new_SILU_128x6_with_hessian_grad_norm
+  project: GRNeF_Brandstetter_lab
+  validate_every_n_epochs: 20
+  validation_num_batches: 10
+
+2025-07-13 02:56:42,827 - INFO - Data config:
+2025-07-13 02:56:42,827 - INFO - compute_volume_element: true
+coordinate_system: cartesian
+data_dir: /system/user/publicwork/crangano/neurips_runs/neurips_data/schwarzschild/EinFields
+endpoint:
+- true
+- true
+- true
+- true
+grid_range:
+- - 0.0
+  - 10.0
+- - 0.0
+  - 10.0
+- - 0.0
+  - 10.0
+- - 0.0
+  - 10.0
+grid_shape:
+- 140
+- 10
+- 10
+- 140
+metric: GW
+metric_args:
+  omega: 2.0
+  polarization_amplitudes: !!python/tuple
+  - 1.0e-06
+  - 1.0e-06
+other_coordinate_systems: []
+problem: linearized_gravity
+recompute_volume_elements: true
+store_quantities:
+  store_GR_tensors: false
+  store_distortion: true
+  store_symmetric: true
+
+2025-07-13 02:56:42,832 - INFO - Freezing the config before training...
+2025-07-13 02:56:42,835 - INFO - Config freezed successfully.
+2025-07-13 02:56:42,835 - INFO - Visible devices: [CudaDevice(id=0)]
+2025-07-13 02:56:42,835 - INFO - JAX default backend: gpu
+2025-07-13 02:56:42,835 - INFO - Initializing training...
+2025-07-13 02:56:42,977 - INFO - Loading data from /system/user/publicwork/crangano/neurips_runs/neurips_data/EinFields/linearized_gravity/cartesian/no_scale
+2025-07-13 02:56:42,977 - INFO - Loading metric:
+2025-07-13 02:56:45,302 - INFO - Metric: (1960000, 16)
+2025-07-13 02:56:47,084 - INFO - Loading Hessian data for training.
+2025-07-13 02:56:54,414 - INFO - Hessian: (1960000, 256)
+2025-07-13 02:56:54,415 - INFO - Loading Jacobian data for training.
+2025-07-13 02:56:59,852 - INFO - Jacobian: (1960000, 64)
+2025-07-13 02:56:59,853 - INFO - Loading Jacobian and Hessian for validation.
+2025-07-13 02:57:11,035 - INFO - Loading complete.
+2025-07-13 02:57:12,314 - INFO - Initializing a new run
+2025-07-13 02:57:17,175 - INFO - Model: MLP with 6 x 128 hidden layers and 16 outputs
+2025-07-13 02:57:17,175 - INFO - Number of parameters: 101776
+2025-07-13 02:57:17,176 - INFO - Starting training with 200 batch(es)
+2025-07-13 03:38:50,652 - INFO - Loss final: 2.0959427939157716e-15, ... {'metric': Array(2.0959428e-15, dtype=float32), 'hessian': Array(4.331736e-23, dtype=float32), 'jacobian': Array(6.948199e-24, dtype=float32)}
+2025-07-13 03:38:50,658 - INFO - Storing checkpoint at /system/user/publicwork/crangano/neurips_runs/checkpoints/EinFields/gws/qpwh94ds/checkpoint
+2025-07-13 03:38:51,786 - INFO - Training finished in 2528.9504504203796 s
