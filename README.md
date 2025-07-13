@@ -24,7 +24,7 @@ This approach exploits a fundamental property of gravity: every geometric object
 ### Key Features
 
 - **Differential Geometry**: Automatic differentiation computation of Christoffel symbols, Riemann curvature tensors, and other geometric quantities
-- **Multiple Coordinate Systems**: Support for Cartesian, spherical, Boyer-Lindquist, Kerr-Schild, and other coordinate systems  
+- **Multiple Coordinate Systems**: Support for cartesian, spherical, Boyer-Lindquist, Kerr-Schild, and other coordinate systems  
 - **Spacetime Metrics**: Built-in support for Minkowski, Schwarzschild, Kerr, and gravitational wave metrics
 - **Neural Field Training**: Flexible training pipeline
 - **Geodesic Solver**: Tools for computing and visualizing geodesics in spacetime
@@ -104,6 +104,33 @@ EinFields/
 ### Geodesics
 
 #### Schwarzschild orbits
+
+<div>
+  <details>
+    <summary>Perihelion precession</summary>
+    <div align="center">
+      <img src="misc/geodesic_gifs/perihelion_schwarzschild.gif" alt="Perihelion precession" width="400">
+    </div>
+  </details>
+</div>
+<br>
+<div>
+  <details>
+    <summary>Slingshot orbit</summary>
+    <div align="center">
+      <img src="misc/geodesic_gifs/slingshot_schwarzschild.gif" alt="Slingshot orbit" width="400">
+    </div>
+  </details>
+</div>
+<br>
+<div>
+  <details>
+    <summary>Eccentric orbit</summary>
+    <div align="center">
+      <img src="misc/geodesic_gifs/eccentric_schwarzschild.gif" alt="Eccentric Schwarzschild orbit" width="400">
+    </div>
+  </details>
+</div>
 
 #### Kerr orbits
 

@@ -201,23 +201,28 @@ If you choose "y", you can edit:
 
 ### Loss Norms (`--norm`)
 - `mse`: Mean squared error (default)
+#### Experimental
 - `minkowski`: Minkowski (not actually a norm, convergence not guaranteed)
 - `papuc`: Papuc norm (not actually a norm, only in very specific settings and convergence is not guaranteed)
 
 ### Metric Types (`--metric_type`)
-- `full_flatten`: Standard flattened quantities
-- `distortion`: Distortion-based flattened quantities for the full metric
-- `full_flatten_sym`: Symmetric part flattened quantities
-- `distortion_sym`: Symmetric part distortion quantities for the full metric
+- `full_flatten`: Standard flattened quantities (metric of shape (16,), Jacobian of shape (64,), Hessian of shape (256,))
+- `distortion`: Distortion-based flattened quantities for the full metric (metric of shape (16,), Jacobian of shape (64,), Hessian of shape (256,))
+- `full_flatten_sym`: Symmetric part flattened quantities (metric of shape (10,), Jacobian of shape (40,), Hessian of shape (100,))
+- `distortion_sym`: Symmetric part distortion quantities for the full metric (metric of shape (10,), Jacobian of shape (40,), Hessian of shape (100,))
 
-## Data Directory Requirements
+Note: If metric is not of type `_sym`, then choosing `output_dim=10` for architecture is allowed, but before training starts it will reshape and reconstruct the (4,4) metric. On the other hand, for `_sym` type it will not reshape or reconstruct, and it will use the symmetric shapes.
+
+## Data Generation
 
 
-### Required Files
+### Training requirements
+
+#### Required Files
 - `coords_train.npy`: Training coordinates
 - `coords_validation.npy`: Validation coordinates
 
-### Conditional Files
+#### Conditional Files
 - **Integration mode** (`--integration true`):
   - `inv_volume_measure_train.npy`
   - `inv_volume_measure_validation.npy`
@@ -270,13 +275,61 @@ folder_name/problem_name/
 
 The same structure follows for `other_coordinate_systems` if provided. `other_coordinate_systems` is for the same metric but represented in different coordinates and evaluated at the same collocation points expressed in these coordinates.
 
-The GR tensors will only be stored in `full_flatten`. The `no_scale` name is to distinguish from `scale` transformations (streching) which can be applied to the metric in its `coordinate system` and not in `other_coordinate_systems`. These will create file names `scale1`, `scale2` etc.
+The `no_scale` name is to distinguish from `scale` transformations (streching) which can be applied to the metric in its `coordinate system` and not in `other_coordinate_systems`. These will create file names `scale1`, `scale2` etc.
 
-Check for `--data_dir` in config to be ./folder_name/problem_name/coordinate_system. Then finish with /no_scale or /scale1 depending on your usecase.
+Check for `--data_dir` in training config to be `./folder_name/problem_name/coordinate_system` + `/no_scale` or `/scale1` etc. depending on your usecase.
 
-### Parent Directory Requirements
+#### Parent Directory Requirements
 The parent directory of your data directory must contain:
 - `config.yml`: Problem-specific configuration file
+
+### Config parameters and metric type explained
+
+#### Basic config
+
+```yaml
+"metric": "Kerr",
+"metric_args": {
+    "M": 1.0,
+    "a": 0.7,
+},
+"coordinate_system":"kerr_schild_cartesian",
+"other_coordinate_systems": other_coordinate_systems, 
+"grid_shape": [1, 128, 128, 128],
+"grid_range": [
+    [0.0, 0.0],
+    [-3., 3.],
+    [-3., 3.],
+    [0.1, 3.]], # Avoiding singularity at z=0
+"endpoint": [True, True, True, True],
+"store_quantities" : {
+    "store_symmetric": True,
+    "store_distortion": True,
+    "store_GR_tensors": False,
+},
+"compute_volume_element": False,
+"recompute_volume_elements": False, # Not implemented yet
+"problem": "Kerr",
+"data_dir": "/your_path/data_dir"
+```
+
+#### Details
+- `metric` is checked if its present in `/data_lookup_tables.py`. So far only Schwarzschild, Kerr and GWs are available.
+- `metric_args` should always contain `M` and maybe `a` if working with a rotating black hole. Remember that `G`=`c`=1. For gravitational waves, other metric_args are needed, see below. Its not mandatory to have only these arguments, the code will only use the needed ones. For example, if `M` or `a` is introduced in the dictionary it will have no effect and give no errors.
+
+```yaml
+"metric_args": {
+    "polarization_amplitudes": (1e-6, 1e-6),
+    "omega": 1.0,
+}
+```
+
+
+- `coordinate_system` must be exactly named as in the available coordinate system for each metric which can be found in the `/data_lookup_tables.py`.
+- `endpoint` is to control whether to include or not the right end of the the interval for each coordinate axis.
+- if `store_symmetric=True`, it will store the symmetric content for both metrics full and `distortion` (if `store_distortion=True`).
+- The GR tensors (if `store_GR_tensors=True`) will only be stored in `full_flatten`.
+- `compute_volume_element` is if you want to replace mean squared error loss which gives equal weighting 1/n to a different weighting which depends on an invariant volume element dVsqrt(g), where dV are some numerically calculated volume elements based on the axes gradients. If one of the axes is sampled once, this will automatically fall to the subspace with at least 2 elements on the axis (computing a 2D, 3D volume weighting). This is to mimic the invariant integration under coordinate changes in general relativity. In our available analytical metrics this was not useful because when trained on distortion metrics these all have determinant zero.
 
 ## Optimizer-Specific Limitations
 
