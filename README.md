@@ -205,9 +205,20 @@ EinFields/
 - **[Examples](example_notebooks)**: Jupyter notebooks demonstrating general relativity, differential geometry framework usage and basic trained EinFields usage.
 - **Configuration Templates**: Pre-configured YAML files in [`configs`](einstein_fields/configs/)
 
+## Credits
+
+```
+Andrei Bodnar (Department of Physics and Astronomy, University of Manchester, UK)
+
+Sandeep Cranganore (LIT AI Lab, Institute for Machine Learning, JKU Linz, Austria)
+
+Artūrs Bērziņš (LIT AI Lab, Institute for Machine Learning, JKU Linz, Austria)
+
+```
+
 ## Citation 
 ```
-@misc{your_arxiv_citation,
+@article{your_arxiv_citation,
       title={EINSTEIN FIELDS: A NEURAL PERSPECTIVE TO COMPUTATIONAL GENERAL RELATIVITY},
       author={Cranganore, Bodnar and Berzins},
       year={2025},
