@@ -89,11 +89,12 @@ def kerr_init_condition(r0 : float, theta0 : float, phi0 : float, M : float, a :
 
     return x0, v0
 
-def schwarzschild_init_condition(r0 : float, theta0 : float, phi0 : float, M : float, v0 : float, vr0: float, v_theta0 : float, v_phi0 : float = 0.) -> Tuple[jax.Array, jax.Array]:
+def schwarzschild_init_condition(r0 : float, theta0 : float, phi0 : float, M : float, v0 : float, vr0: float, v_theta0 : float, v_phi0 : float) -> Tuple[jax.Array, jax.Array]: # = 0.
     """
         Creates the initial conditions for the Schwarzschild metric in spherical coordinates.
     """
-    x0 = jnp.array([0., r0, theta0, phi0])
+    t0 = 0.0 
+    x0 = jnp.array([t0, r0, theta0, phi0])
 
     lorentz_factor = 1 / jnp.sqrt(1 - v0**2)
 
@@ -204,20 +205,20 @@ def create_plot(xlim : int,
 
     lc_gt = LineCollection(
             [jnp.column_stack([x_gt[i], y_gt[i]]) for i in range(len(x_gt))],
-            color='green',
+            color='mediumseagreen',
             alpha=1.0,
-            label='Geodesic',
+            label='Ground truth geodesic',
             linestyles='solid',
-            linewidths=0.8,
+            linewidths=1.2,
     )
     if x_nef is not None and y_nef is not None:
         lc_nef = LineCollection(
             [jnp.column_stack([x_nef[i], y_nef[i]]) for i in range(len(x_nef))],
-            color='red',
+            color='orangered',
             alpha=1.,
-            label='NEF Geodesic',
-            linestyles='solid',
-            linewidths=0.8,
+            label='EinFields geodesic',
+            linestyles='-.',
+            linewidths=2.0,
         )
         ax.add_collection(lc_nef)
 
