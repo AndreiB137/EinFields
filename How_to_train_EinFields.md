@@ -24,6 +24,7 @@ python main.py \
 **Required CLI parameters**: `--arch_name`, `--activation`, `--optimizer`, `--scheduler`, `--data_dir`,
 `--log_dir`
 
+
 ### Method 2: Config File (recommended)
 
 ```bash
@@ -35,6 +36,11 @@ python main.py --config_file path/to/your_config.yml
 ```bash
 python main.py --checkpoint /path/to/checkpoint_directory
 ```
+
+Note: 
+- There is no need to specify `--run_dir` or even in the .yml config file because the script will automatically create it based on the current date and time.
+
+- Validation during training is only possible if `wandb` is in the config file.
 
 ## Configuration Modes Explained
 
