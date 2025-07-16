@@ -22,12 +22,11 @@
 """
 
 import logging
-import os, sys
+import os
 os.environ['XLA_PYTHON_CLIENT_MEM_FRACTION'] = '.75'
 from ml_collections import ConfigDict, FrozenConfigDict
 import argparse
 import orbax.checkpoint as ocp
-sys.path.append(os.path.abspath(f"/system/user/crangano/EinFields/"))
 from einstein_fields.nn_models import list_activations, get_extra_model_cfg, model_key_dict
 from einstein_fields.utils import (
     get_optimizer_args,
@@ -78,7 +77,7 @@ def parse_args():
     # --- Configuration and checkpoint ---
 
     logg_check_group = parser.add_argument_group("Configuration, Logging, checkpoint")
-    logg_check_group.add_argument("--config_file", type=valid_file, default="/system/user/crangano/EinFields/einstein_fields/configs/schwarzschild/config.yml",
+    logg_check_group.add_argument("--config_file", type=valid_file, default=None,
                         help="Use a pre-defined yaml config file. If set, the training will start from this config file. Ensure the config has the same structure as the default config file.")
     logg_check_group.add_argument("--log_dir", type=valid_dir, default=None,
                         help="Path to the directory where the logs will be stored.")

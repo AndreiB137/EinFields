@@ -81,8 +81,7 @@ def get_config(use_wandb : bool = True):
     return config
 
 if __name__ == "__main__":
-    config = get_config(use_wandb=True)
-    with open("/Users/andrei/Documents/dataa/GRNFs-2/neural_compression/configs/config_train.yml", "w") as f:
-        yaml.dump(config.to_dict(), f, sort_keys=False)
+    config = get_config(use_wandb=False)
+    
 
     

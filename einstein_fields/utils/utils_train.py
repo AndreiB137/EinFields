@@ -122,7 +122,6 @@ def store_checkpoint(run_dir: str, params: dict, opt_state: Any, epoch: int, las
     if not os.path.exists(checkpoint_path):
         os.makedirs(checkpoint_path)
     
-    # options = ocp.CheckpointManagerOptions(max_to_keep=1, create=True)
     options = ocp.CheckpointManagerOptions(
         enable_async_checkpointing=False
     )
@@ -264,11 +263,12 @@ def load_data(config: FrozenConfigDict | ConfigDict) -> tuple[dict, dict]:
                 "metric_full": jnp.load(os.path.join(data_dir, "full_flatten", "validation", "metric.npy")),
             })
 
-    for k, v in config.data.losses.items():
-        if v:
-            logging.info(f"Loading {k.capitalize()} data for training.")
-            training_data[k] = jnp.load(os.path.join(training_dir, f"{k}.npy"))
-            logging.info(f"{k.capitalize()}: {training_data[k].shape}")
+    loss_order = ['jacobian', 'hessian']
+    for loss_type in loss_order:
+        if config.data.losses[loss_type]:
+            logging.info(f"Loading {loss_type.capitalize()} data for training.")
+            training_data[loss_type] = jnp.load(os.path.join(training_dir, f"{loss_type}.npy"))
+            logging.info(f"{loss_type.capitalize()}: {training_data[loss_type].shape}")
 
     if 'wandb' in config:
         logging.info(f"Loading Jacobian and Hessian for validation.")
