@@ -13,7 +13,7 @@
 
 ## Overview
 
-This project accompanies our paper [Einstein Fields: A neural perspective to computational general relativity](https://arxiv.org/abs/XXXX.XXXXX).
+This project accompanies our paper [Einstein Fields: A neural perspective to computational general relativity](https://arxiv.org/abs/2507.11589v1).
 
 **EinFields** (or **Einstein Fields**) is a comprehensive implicit neural representation framework for computational general relativity. It leverages **JAX's** functional programming paradigm for maximum compatibility and ease-of-use when combined with the mathematical structure of **tensor fields**. 
 
@@ -207,12 +207,12 @@ EinFields/
 
 ## Citation 
 ```
-@article{your_arxiv_citation,
+@article{
       title={EINSTEIN FIELDS: A NEURAL PERSPECTIVE TO COMPUTATIONAL GENERAL RELATIVITY},
       author={Cranganore, Bodnar and Berzins},
       year={2025},
-      eprint={XXXX.XXXXX},
+      eprint={2507.11589},
       archivePrefix={arXiv},
-      primaryClass={cs.AI}
+      primaryClass={cs.LG}
 }
 ```
