@@ -572,7 +572,7 @@ def scaled_func(k0 : float, k1 : float, k2 : float, k3 : float) -> Callable:
 
 def apply_scaling_transformations(
     F: Sequence[Callable[[jax.Array], jax.Array]]
-) -> Optional[jaxlib.xla_extension.PjitFunction]:
+) -> Callable[[jax.Array], jax.Array]:
     """
     Applies a tuple or list of component-wise transformations `F = (f₀, f₁, ..., fₙ₋₁)` 
     to the coordinates returned by a map `X(p)`.
