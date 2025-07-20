@@ -29,12 +29,12 @@ import numpy as np
 import jax
 import jax.numpy as jnp  
 import jaxlib
-from typing import Callable, Union
+from typing import Callable
 
 def metric_jacobian_forwarddiff(
     metric: Callable[[jax.Array], jax.Array], 
     fd_stencil: Callable[[jax.Array], jax.Array]
-) -> Union[jaxlib.xla_extension.PjitFunction, Callable]: 
+) -> Callable[[jax.Array, float], jax.Array]: 
     """
     Compute the metric Jacobian at a given point p on the manifold.
 
@@ -80,7 +80,7 @@ def metric_jacobian_forwarddiff(
 def christoffel_symbol_forwarddiff( 
     metric: Callable[[jax.Array], jax.Array], 
     fd_stencil: Callable[[jax.Array], jax.Array]
-) -> Union[jaxlib.xla_extension.PjitFunction, Callable]:
+) -> Callable[[jax.Array, float], jax.Array]:
     """
     Compute the Christoffel symbol at a given point p on the manifold.
 
@@ -125,7 +125,7 @@ def christoffel_symbol_forwarddiff(
 def christoffel_symbols_jac_forwarddiff(
     christoffel: Callable[[jax.Array], jax.Array], 
     fd_stencil:  Callable[[jax.Array], jax.Array]
-) -> Union[jaxlib.xla_extension.PjitFunction, Callable]: 
+) -> Callable[[jax.Array, float], Callable]: 
     """
     Compute the Jacobian of Christoffel symbols at a given point p on the manifold.
     
