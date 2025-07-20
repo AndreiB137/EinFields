@@ -198,6 +198,12 @@ EinFields/
   </table>
 </div>
 
+## Hugging Face
+
+For a more organized approach, I recommend having a look at our models and datasets integrated in the HF
+interface: https://huggingface.co/papers/2507.11589. 
+
+This will allow you with minimal effort to play with pre-trained models and download some of the datasets used for training these. Check if you have enough space on your system as each dataset is around 30 GB.
 
 ## Documentation
 
