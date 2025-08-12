@@ -1,0 +1,32 @@
+metric: Kerr
+metric_args:
+  M: 1.0
+  a: 0.7
+coordinate_system: kerr_schild_cartesian
+other_coordinate_systems: []
+grid_shape:
+- 1
+- 128
+- 128
+- 128
+grid_range:
+- - 0.0
+  - 0.0
+- - -3.0
+  - 3.0
+- - -3.0
+  - 3.0
+- - 0.1
+  - 3.0
+endpoint:
+- true
+- true
+- true
+- true
+store_quantities:
+  store_symmetric: true
+  store_distortion: true
+  store_GR_tensors: false
+compute_volume_element: false
+problem: kerr
+data_dir: '...'

@@ -1,0 +1,31 @@
+metric: Schwarzschild
+metric_args:
+  M: 1.0
+coordinate_system: spherical
+other_coordinate_systems: []
+grid_shape:
+- 1
+- 128
+- 128
+- 128
+grid_range:
+- - 0.0
+  - 0.0
+- - 5.0
+  - 140.0
+- - 0.01
+  - 3.1315926535897933
+- - 0.0
+  - 6.283185307179586
+endpoint:
+- true
+- true
+- true
+- false
+store_quantities:
+  store_symmetric: true
+  store_distortion: true
+  store_GR_tensors: false
+compute_volume_element: false
+problem: 'schwarzschild'
+data_dir: '...'

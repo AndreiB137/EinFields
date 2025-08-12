@@ -1,0 +1,34 @@
+metric: GW
+metric_args:
+  polarization_amplitudes: !!python/tuple
+  - 1.0e-06
+  - 1.0e-06
+  omega: 2.0
+coordinate_system: cartesian
+other_coordinate_systems: []
+grid_shape:
+- 140
+- 10
+- 10
+- 140
+grid_range:
+- - 0.0
+  - 10.0
+- - 0.0
+  - 10.0
+- - 0.0
+  - 10.0
+- - 0.0
+  - 10.0
+endpoint:
+- true
+- true
+- true
+- true
+store_quantities:
+  store_symmetric: true
+  store_distortion: true
+  store_GR_tensors: false
+compute_volume_element: false
+problem: 'gw'
+data_dir: '...'
