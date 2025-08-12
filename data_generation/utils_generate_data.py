@@ -26,7 +26,7 @@ import numpy as np
 import itertools
 import jax
 import jax.numpy as jnp
-import jaxlib 
+import shutil 
 import logging
 import yaml
 from typing import Callable, Union, Optional, Tuple, Literal, Sequence
@@ -509,11 +509,9 @@ def loop_over_tensor_storing(
 def store_other_coord_systems_quantities(config: Union[dict, ConfigDict], 
                                          coords_train : jax.Array,
                                          coords_validation: jax.Array, 
-                                         save_dir: str,
-                                         recompute_volume_elements: bool = True) -> None: 
+                                         save_dir: str) -> None: 
 
     logging.info(f"Starting the process for storing other coordinate systems: {config.get('other_coordinate_systems')}")
-    transformed_metrics_fn = {} 
     for k in config["other_coordinate_systems"]:  
         try:
             full_metric_fn = return_metric_fn(config.get('metric'), 'full', k, config.get('metric_args'))
@@ -544,10 +542,20 @@ def store_other_coord_systems_quantities(config: Union[dict, ConfigDict],
                                         store_GR_tensors=config.get('store_quantities').get('store_GR_tensors'),
                                         store_symmetric=config.get('store_quantities').get('store_symmetric'),
                                         distortion_metric_fn=distortion_metric_fn,
-                                        dV_grid=None,  # No volume element for transformed coordinates
-                                        integrating_axes=None  # No volume element for transformed coordinates
+                                        dV_grid=None,
+                                        integrating_axes=None
         )
-        
+
+        # Save the same volume elements as in the original coordinate system
+        if config.get('compute_volume_element'):
+            original_inv_vol_train = os.path.join(save_dir, config.get('coordinate_system'), "no_scale", "inv_volume_measure_train.npy")
+            original_inv_vol_val = os.path.join(save_dir, config.get('coordinate_system'), "no_scale", "inv_volume_measure_validation.npy")
+            
+            if os.path.exists(original_inv_vol_train):
+                shutil.copy2(original_inv_vol_train, os.path.join(other_coord_dir, "inv_volume_measure_train.npy"))
+            if os.path.exists(original_inv_vol_val):
+                shutil.copy2(original_inv_vol_val, os.path.join(other_coord_dir, "inv_volume_measure_validation.npy"))
+
         print(f"Done with {k}.")
 
         del coords_transformed, coords_val_transformed, other_coord_dir

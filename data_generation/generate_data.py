@@ -22,6 +22,7 @@
 """
 
 import os
+os.environ["JAX_PLATFORMS"] = "cpu"
 import jax
 import jax.numpy as jnp
 import shutil
@@ -30,8 +31,11 @@ import yaml
 jax.config.update('jax_enable_x64', True)
 jax.config.update("jax_default_matmul_precision", "highest")
 
-os.environ["JAX_PLATFORMS"] = "cpu"
-from data_generation.utils_generate_data import (validate_config, create_coords_and_vol_el, loop_over_tensor_storing, return_metric_fn, store_other_coord_systems_quantities)
+from data_generation.utils_generate_data import (validate_config, 
+                                                 create_coords_and_vol_el, 
+                                                 loop_over_tensor_storing, 
+                                                 return_metric_fn, 
+                                                 store_other_coord_systems_quantities)
 
 if __name__ == '__main__':
     M = 1.0
@@ -62,10 +66,9 @@ if __name__ == '__main__':
             "store_distortion": True,
             "store_GR_tensors": False,
         },
-        "compute_volume_element": True,
-        "recompute_volume_elements": True, # Not implemented yet
-        "problem": "test_script1",
-        "data_dir": "/Users/andrei/Documents/dataa/EinFields/data"} 
+        "compute_volume_element": False,
+        "problem": "...",
+        "data_dir": "..."} 
     
     validate_config(config)
     logging.basicConfig(level=logging.INFO, encoding='utf-8', force=True)
@@ -94,6 +97,13 @@ if __name__ == '__main__':
     with open(cfg_file, 'w') as f:
         yaml.dump(config, f)
 
+    # Example how to use transform_list
+    # from data_generation.utils_generate_data import scaled_func
+    # transform_list = [scaled_func(1.0, 2.0, 3.0, 4.0), 
+    #                   scaled_func(10.2, 1.5, 9.23, 4.3)]
+    # You can have as many transform as you want, but the number of arguments needs to match
+    # the number of coordinates in the metric function.
+
     loop_over_tensor_storing(metric_fn,
                              coords_train,
                              coords_validation,
@@ -103,9 +113,10 @@ if __name__ == '__main__':
                              integrating_axes,
                              transform_list=None,)
 
-    ## TODO: Recalculation of volume elements is not implementey yet.
-    ## For example, if integrating only the spatial volume,
-    ## in a new coordinate system, you might need all 4 components to describe the volume measure,
-    ## so the integration axes might change.
+    # If volume elements is set to True, the same elements will be copied to the other coordinate systems,
+    # since all coordinate transformations involved are diffeomorphisms.
     if len(other_coordinate_systems) > 0:
-        store_other_coord_systems_quantities(config, save_dir, coords_train, coords_validation, dV_grid, integrating_axes)
+        store_other_coord_systems_quantities(config=config, 
+                                             coords_train=coords_train, 
+                                             coords_validation=coords_validation,
+                                             save_dir=save_dir)
