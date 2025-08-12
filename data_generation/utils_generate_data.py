@@ -104,6 +104,11 @@ def validate_config(config : Union[dict, ConfigDict]) -> None:
             f"Some of the other coordinate systems are not available for {metric_name} metric. "
             f"Allowed: {list(metric_dict[metric_name]['coordinate_system'].keys())}"
         )
+    for k in other_coord_systems:
+        if k not in coord_transform_dict.get(config.get("coordinate_system")).keys():
+            raise ValueError(
+                f"Coordinate metric is defined for {k} coordinate system, but no coordinate transformation is available or not implemented yet."
+            )
     
 def extract_axes_from_coords(coords: jax.Array, grid_shape: list[int]) -> tuple[jax.Array, ...]:
     """
@@ -513,14 +518,10 @@ def store_other_coord_systems_quantities(config: Union[dict, ConfigDict],
 
     logging.info(f"Starting the process for storing other coordinate systems: {config.get('other_coordinate_systems')}")
     for k in config["other_coordinate_systems"]:  
-        try:
-            full_metric_fn = return_metric_fn(config.get('metric'), 'full', k, config.get('metric_args'))
-        except ValueError as e:
-            logging.info(f"Coordinate transformation for {k} is not available or not implemented yet, skipping this coordinate system.")
-            continue
+        
+        full_metric_fn = return_metric_fn(config.get('metric'), 'full', k, config.get('metric_args'))
 
         distortion_metric_fn = return_metric_fn(config.get('metric'), 'distortion', k, config.get('metric_args')) if config.get('store_quantities').get('store_distortion') else None
-
         kwargs = get_kwargs_for_func(coord_transform_dict[config.get("coordinate_system")][k]["extra_args"], config.get('metric_args'))
         coord_fns = lambda coords : coord_transform_dict[config.get('coordinate_system')][k]["transform"](coords, **kwargs)
         

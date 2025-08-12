@@ -38,37 +38,12 @@ from data_generation.utils_generate_data import (validate_config,
                                                  store_other_coord_systems_quantities)
 
 if __name__ == '__main__':
-    M = 1.0
-    a = 0.0
-    other_coordinate_systems = [] # "kerr_schild"  #["cartesian", "eddington_finkelstein"] 
     # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% main data generation part starts here %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    config = {
-        "metric": "Schwarzschild",
-        "metric_args" : {
-            "M": M,
-        },
-        # if "metric": "GW" comment the above metric_args and uncomment te below metric_args
-        # "metric_args" : {
-        #     "polarization_amplitudes": (1.e-6, 1.e-6), 
-        #     "omega": 2.0},
-        "coordinate_system":"spherical",
-        "other_coordinate_systems": other_coordinate_systems, 
-        "grid_shape": [1,128,128,128],
-        "grid_range": [
-            [0.0, 0.0],
-            [5.0, 140.0],
-            [1.e-2, jnp.pi-1.e-2], # always choose (0, \pi) since, zenith angle is always chosen as this
-            [0.0, 2.0*jnp.pi]], # always choose [0, 2\pi) for azimuthal angle from now on, since the angles, modulo phase has been rectified
-        "endpoint": [True, True, True, False],
-        "store_quantities" : {
-            "store_symmetric": True,
-            "store_distortion": True,
-            "store_GR_tensors": False,
-        },
-        "compute_volume_element": False,
-        "problem": "...",
-        "data_dir": "..."} 
+    config_path = "configs/schwarzschild_spherical.yml"
+
+    with open(config_path, "r") as f:
+        config = yaml.load(f, Loader=yaml.FullLoader)
     
     validate_config(config)
     logging.basicConfig(level=logging.INFO, encoding='utf-8', force=True)
@@ -95,7 +70,7 @@ if __name__ == '__main__':
     
     logging.info(f"Storing the config file at {cfg_file}.")
     with open(cfg_file, 'w') as f:
-        yaml.dump(config, f)
+        yaml.dump(config, f, sort_keys=False)
 
     # Example how to use transform_list
     # from data_generation.utils_generate_data import scaled_func
@@ -115,7 +90,7 @@ if __name__ == '__main__':
 
     # If volume elements is set to True, the same elements will be copied to the other coordinate systems,
     # since all coordinate transformations involved are diffeomorphisms.
-    if len(other_coordinate_systems) > 0:
+    if len(config.get('other_coordinate_systems', [])) > 0:
         store_other_coord_systems_quantities(config=config, 
                                              coords_train=coords_train, 
                                              coords_validation=coords_validation,
