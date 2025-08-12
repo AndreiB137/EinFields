@@ -394,4 +394,14 @@ If you encounter GPU memory errors:
 - Increase `--num_batches` or `--validation_num_batches` (if `wandb` is used)
 - Adjust `XLA_PYTHON_CLIENT_MEM_FRACTION` environment variable (default: 0.75)
 
+### Jax compatibility with latest version
+
+- Highly recommended to pip install -U the latest versions of all Jax dependent software in case of using Jax 0.6 or 0.7. Many things are getting depricated or removed from the API.
+
+- In Jax 0.7 (and maybe a bit earlier) `kfac-jax` (or `tensorflow_probability`, which is used by it) gives AttributeError for `jax.interpreters.xla.pytype_aval_mappings`. Remove these lines in the code:
+```python
+  jax.interpreters.xla.pytype_aval_mappings[NumpyVariable] = (
+      jax.interpreters.xla.pytype_aval_mappings[onp.ndarray])
+```
+
 For additional help, check the validation error messages which provide specific guidance for fixing configuration issues.
