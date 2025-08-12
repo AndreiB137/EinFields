@@ -1,6 +1,8 @@
 from .coord_transform import (
     cartesian_to_spherical,
     spherical_to_cartesian,
+    spherical_to_kerr_schild_cartesian,
+    kerr_schild_cartesian_to_spherical,
     cartesian_to_oblate_spheroid,
     oblate_spheroid_to_cartesian,
     oblate_spheroid_to_kerr_schild,
@@ -12,5 +14,5 @@ from .coord_transform import (
     kerr_schild_to_boyer_lindquist,
     boyer_lindquist_to_kerr_schild,
     eddington_finkelstein_to_boyer_lindquist,
-    boyer_lindquist_to_eddington_finkelstein
+    boyer_lindquist_to_eddington_finkelstein,
 )

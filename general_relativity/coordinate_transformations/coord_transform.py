@@ -85,6 +85,61 @@ def spherical_to_cartesian(
     z = r*jnp.cos(theta) 
     return jnp.stack([t, x, y, z], axis=-1)
 
+def spherical_to_kerr_schild_cartesian(
+    spherical_coords: jax.Array,
+    M: float,
+) -> jax.Array:
+    """
+    Converts spherical coordinates to Kerr-Schild Cartesian coordinates.
+
+    Parameters
+    ----------
+    spherical_coords : jax.Array
+        Spherical coordinates (t, r, θ, φ).
+    M : float
+        Mass of the black hole.
+
+    Returns
+    -------
+    jax.Array
+        Kerr-Schild Cartesian coordinates (t, x, y, z).
+    
+    Notes
+    -----
+    - Useful for horizon-penetrating simulations in Kerr spacetime.
+    """
+    return boyer_lindquist_to_kerr_schild(
+        spherical_coords,
+        M=M,
+        a=0.
+    )
+
+def kerr_schild_cartesian_to_spherical(
+    kerr_schild_coords: jax.Array,
+    M: float,
+) -> jax.Array:
+    """
+    Converts Kerr-Schild Cartesian coordinates to spherical coordinates.
+
+    Parameters
+    ----------
+    kerr_schild_coords : jax.Array
+        Kerr-Schild Cartesian coordinates (t, x, y, z).
+    
+    Returns
+    -------
+    jax.Array
+        Spherical coordinates (t, r, θ, φ).
+
+    Notes
+    -----
+    - Useful for interpreting quantities in the standard spherical chart.
+    """
+    return kerr_schild_to_boyer_lindquist(
+        kerr_schild_coords,
+        M=M,
+        a=0.
+    )
 
 def ingoing_eddington_finkelstein_to_spherical(
     ief_coords: jax.Array, 

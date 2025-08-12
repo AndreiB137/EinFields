@@ -54,6 +54,8 @@ from general_relativity import (
 from general_relativity import (
     cartesian_to_spherical,
     cartesian_to_oblate_spheroid,
+    spherical_to_kerr_schild_cartesian,
+    kerr_schild_cartesian_to_spherical,
     spherical_to_cartesian,
     spherical_to_ingoing_eddington_finkelstein,
     spherical_to_outgoing_eddington_finkelstein,
@@ -100,11 +102,6 @@ metric_dict = {
                 "extra_args": ["M"],
                 "full": schwarzschild_metric_spherical,
                 "distortion": schwarzschild_metric_spherical_distortion
-            },
-            "kerr_schild_cartesian": {
-                "extra_args": ["M"],
-                "full": schwarzschild_metric_kerr_schild,
-                "distortion": schwarzschild_metric_kerr_schild_distortion
             },
             "ingoing_eddington_finkelstein": {
                 "extra_args": ["M"],
@@ -171,6 +168,10 @@ coord_transform_dict = {
         "outgoing_eddington_finkelstein": {
             "extra_args": ["M"],
             "transform": spherical_to_outgoing_eddington_finkelstein
+        },
+        "kerr_schild_cartesian": {
+            "extra_args": ["M"],
+            "transform": spherical_to_kerr_schild_cartesian
         }
     },
     "ingoing_eddington_finkelstein": {
@@ -181,6 +182,12 @@ coord_transform_dict = {
         "boyer_lindquist": {
             "extra_args": ["M", "a"],
             "transform": eddington_finkelstein_to_boyer_lindquist
+        },
+        "kerr_schild_cartesian": {
+            "extra_args": ["M", "a"],
+            "transform": lambda coords, M, a: boyer_lindquist_to_kerr_schild(
+                eddington_finkelstein_to_boyer_lindquist(coords, M, a), M, a
+            )
         }
     },
     "outgoing_eddington_finkelstein": {
@@ -200,6 +207,10 @@ coord_transform_dict = {
         }
     },
     "kerr_schild_cartesian": {
+        "spherical": {
+            "extra_args": ["M"],
+            "transform": kerr_schild_cartesian_to_spherical
+        },
         "oblate_spheroid": {
             "extra_args": ["a"],
             "transform": kerr_schild_to_oblate_spheroid
@@ -207,6 +218,12 @@ coord_transform_dict = {
         "boyer_lindquist": {
             "extra_args": ["M", "a"],
             "transform": kerr_schild_to_boyer_lindquist
+        },
+        "ingoing_eddington_finkelstein": {
+            "extra_args": ["M", "a"],
+            "transform": lambda coords, M, a: kerr_schild_to_boyer_lindquist(
+                boyer_lindquist_to_eddington_finkelstein(coords, M, a), M, a
+            )
         }
     },
     "boyer_lindquist": {
