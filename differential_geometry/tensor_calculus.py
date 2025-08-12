@@ -56,16 +56,16 @@ class DifferentialGeometry:
 
         General relativity
         ------------------
-        Einstein questioned whether the gravitational acceleration is somehow an "illusion". In a vaccum, where the gravitational field is 
+        Einstein questioned whether the gravitational acceleration is somehow an "illusion". In a vacuum, where the gravitational field is 
         constant, bodies fall at the same rate and they would not be able to tell whether there is a force or not. This very simplified view 
-        actually discribes the essence of general relativity in "small" regions of spacetime, or in other words, in a local inertial frame. 
+        actually describes the essence of general relativity in "small" regions of spacetime, or in other words, in a local inertial frame. 
         In reality, if two bodies are sufficiently far apart and released at some distance above the surface of the Earth, they will start 
         to approach each other. 
         
         This leads to the idea that if freely falling bodies are following geodesics, then this approach (or divergence)
         is due to non-local effects, namely non-constant gravitational field which translates into the geometric concept of geodesic deviation, 
         described by the Riemann curvature tensor. Then, general relativity becomes a description of the geometry of spacetime, more exactly,
-        a pseudo-Riemannian manifold with a metric tensor field econding the effects of gravity. 
+        a pseudo-Riemannian manifold with a metric tensor field encoding the effects of gravity. 
         
         All Einstein's ideas are converted into
         the mathematical description of differential geometry. Locally, the metric tensor can be approximated by the Minkowski metric, which 
@@ -91,7 +91,7 @@ class DifferentialGeometry:
         All tensor operations are implemented with `jnp.einsum` for maximum performance from the various optimizations einsum provides. A list of
         available and most important differential geometry quantities is provided below:
         - `christoffel_symbols`
-        - `riemannn_tensor`
+        - `riemann_tensor`
         - `ricci_tensor`
         - `ricci_scalar`
         - `weyl_curvature_tensor`
@@ -155,10 +155,10 @@ class DifferentialGeometry:
 
         Future work
         -----------
-        Although most opeerations on tensors don't require a complicated handling of the rank,
+        Although most operations on tensors don't require a complicated handling of the rank,
         there can be scenarios where it might be useful to compose some of this operations, 
         such as the composition of Levi-Civita connection on a tensor field multiple times 
-        increases the covariant rank. For more flexibility and easy of use with this differential
+        increases the covariant rank. For more flexibility and ease of use with this differential
         geometry perspective, we plan to implement a tensor field class which should, among other things,
         keep track of the rank. Moreover, the compatibility with JAX's functional programming paradigm
         will require the tensor field object have a `__call__` method, which will allow it to be used
