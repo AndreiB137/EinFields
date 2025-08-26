@@ -213,12 +213,13 @@ This will allow you with minimal effort to play with pre-trained models and down
 
 ## Citation 
 ```
-@article{
-      title={EINSTEIN FIELDS: A NEURAL PERSPECTIVE TO COMPUTATIONAL GENERAL RELATIVITY},
-      author={Cranganore, Bodnar and Berzins},
+@misc{cranganore2025einsteinfieldsneuralperspective,
+      title={Einstein Fields: A Neural Perspective To Computational General Relativity}, 
+      author={Sandeep Suresh Cranganore and Andrei Bodnar and Arturs Berzins and Johannes Brandstetter},
       year={2025},
       eprint={2507.11589},
       archivePrefix={arXiv},
-      primaryClass={cs.LG}
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2507.11589}, 
 }
 ```
